@@ -1,0 +1,7 @@
+node_modules/
+packages/soul-admin/node_modules/
+packages/soul-blog/node_modules/
+packages/soul-blog/.next
+pnpm-lock.yaml
+
+**/dist/**
