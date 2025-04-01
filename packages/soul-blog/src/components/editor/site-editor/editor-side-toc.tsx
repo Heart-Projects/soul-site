@@ -14,7 +14,6 @@ const EditorTocSideToc = ({ className }: { className?: string }) => {
   useTocNavigationState();
   const [cls, setCls] = useState(TocFloatStyle);
   const headList = headingList as HeadItem[];
-  console.log(headingList);
   if (headList.length === 0) {
     return null;
   }

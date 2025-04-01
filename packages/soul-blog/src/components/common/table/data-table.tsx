@@ -101,7 +101,6 @@ export function DataTable<TData, TValue>({
     if (mode === "server") {
       onChangePageIndex?.(index);
     }
-    console.log(index);
     setInnerPageIndex(index);
   };
   const onDoChangePageSize = (pageSize: number) => {
@@ -110,7 +109,6 @@ export function DataTable<TData, TValue>({
     }
     setInnerPageSize(pageSize);
     const totalPages = Math.ceil(table.getRowCount() / pageSize);
-    console.log(totalPages);
     if (innerPageIndex > totalPages - 1) {
       setInnerPageIndex(totalPages - 1);
     }

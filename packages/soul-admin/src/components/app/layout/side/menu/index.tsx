@@ -13,7 +13,6 @@ const adapterAntdMenuItems = (
   appMenuItems: AppMenuItem[],
   parentKey = "0"
 ): MenuItem[] => {
-  console.log("1");
   const antdMenuItems: MenuItem[] = [];
   for (const item of appMenuItems) {
     const { children } = item;

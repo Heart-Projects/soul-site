@@ -35,7 +35,6 @@ export default function LoginPage() {
       const { success, message, data } = userInfo;
       if (success) {
         dispatch(setUserInfo(data));
-        console.log(data);
         r.push("/");
       } else {
         setErrorMessage(message);
@@ -107,8 +106,8 @@ export default function LoginPage() {
       </div>
       <div className="hidden bg-muted lg:block">
         <Image
-          src="/login-bk.jpg"
-          alt="Image"
+          src="/login-bg.jpg"
+          alt="Soul Blog"
           width="1920"
           height="1080"
           className="h-full w-full object-cover dark:brightness-[0.2] dark:grayscale"

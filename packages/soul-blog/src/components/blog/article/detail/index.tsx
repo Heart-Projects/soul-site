@@ -36,7 +36,6 @@ const ArticleDetail = async ({
   );
   const { success, message, data } = articleDetail;
   const { next, pre } = data;
-  console.log(articleDetail);
   return (
     <div className="bg-second-background">
       <div className="flex px-5 gap-6 pt-6 w-full">

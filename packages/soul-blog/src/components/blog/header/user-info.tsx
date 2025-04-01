@@ -18,12 +18,14 @@ import { useAppSelector } from "@/store/hooks";
 import { useLoginOut } from "@/lib/hooks/user";
 import { CheckUserInfo } from "@/components/global/user";
 import { cn } from "@/lib/utils";
+import { useCallback } from "react";
+
 export default function UserInfo({ className }: { className?: string }) {
   const user = useAppSelector((state) => state.user);
   const doLoginOut = useLoginOut();
-  const onLogout = () => {
+  const onLogout = useCallback(() => {
     doLoginOut();
-  };
+  }, [doLoginOut]);
   return (
     <div className={cn(" inline-block pl-2", className)}>
       {!user.hasLogin ? (

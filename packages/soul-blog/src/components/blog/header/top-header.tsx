@@ -46,7 +46,11 @@ export default function TopHeader() {
       <div className="sticky top-0 left-0 bg-background z-10">
         <div className="flex items-center justify-between pt-2 pb-2 ">
           <div className="flex">
-            <div className="text-3xl font-bold pl-4 pr-4">Soul</div>
+            <div className="text-3xl font-bold pl-4 pr-4">
+              <Link href="/" legacyBehavior passHref>
+                <span className=" cursor-pointer">Soul</span>
+              </Link>
+            </div>
             <div>
               <NavigationMenu>
                 <NavigationMenuList>

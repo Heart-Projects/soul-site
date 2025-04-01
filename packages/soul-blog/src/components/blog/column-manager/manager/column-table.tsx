@@ -71,7 +71,6 @@ const AddColumn = ({
 
   // 2. Define a submit handler.
   async function onSubmit(values: z.infer<typeof formSchema>) {
-    console.log(values);
     const { viewScope, ...rest } = values;
     const res = await requestColumnAdd({
       ...rest,
@@ -240,7 +239,6 @@ const ColumnTable = ({
       activeItem.id || 0
     );
     setDataList(success ? data : []);
-    console.log(activeItem);
   }, [activeItem]);
   useEffect(() => {
     getDataList();

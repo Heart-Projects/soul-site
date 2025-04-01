@@ -16,7 +16,6 @@ const DocContent = forwardRef((props: DocProps, ref) => {
       id: props.data.id as number,
       content: JSON.stringify(content),
     });
-    console.log(content);
   }, 5000);
 
   return (

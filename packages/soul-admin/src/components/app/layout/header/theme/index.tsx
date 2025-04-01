@@ -50,7 +50,6 @@ const ThemeSetting = () => {
   const themeConfig = useSelector((state: RootState) => state.app.theme);
   const dispatch = useDispatch();
   const onChangeTheme = (value: string) => {
-    console.log(value);
     dispatch(setTheme({ primaryColor: value }));
     if (value === "dark") {
       document.documentElement.classList.add("dark");

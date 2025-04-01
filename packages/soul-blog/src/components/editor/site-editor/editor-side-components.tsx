@@ -21,7 +21,6 @@ interface HeadItemEl extends HeadItem {
 }
 
 const onNavItem = ({ item }: { item: HeadItemEl }) => {
-  console.log("on nav item", item);
   document
     .querySelector(`[data-block-id="${item.id}"]`)
     ?.scrollIntoView({ behavior: "smooth", block: "center" });

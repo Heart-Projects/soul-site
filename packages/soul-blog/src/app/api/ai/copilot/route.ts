@@ -1,4 +1,5 @@
 import type { NextRequest } from 'next/server';
+import { deepseek } from '@ai-sdk/deepseek';
 
 import { createOpenAI } from '@ai-sdk/openai';
 import { generateText } from 'ai';
@@ -7,7 +8,7 @@ import { NextResponse } from 'next/server';
 export async function POST(req: NextRequest) {
   const {
     apiKey: key,
-    model = 'gpt-4o-mini',
+    model = 'deepseek-reasoner',
     prompt,
     system,
   } = await req.json();
@@ -26,11 +27,11 @@ export async function POST(req: NextRequest) {
   try {
     const result = await generateText({
       abortSignal: req.signal,
-      maxTokens: 50,
-      model: openai('deepseek-chat'),
+      maxTokens: 500000,
+      model: deepseek('deepseek-reasoner'),
       prompt: prompt,
       system,
-      temperature: 0.7,
+      temperature: 0.1,
     });
 
     return NextResponse.json(result);

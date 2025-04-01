@@ -23,10 +23,8 @@ export const useRemoteRequest = (request: RemoteRequestFunction, options?: Optio
   const mergedOptions = {...defaultOptions, ...options}
   const { successCallback, errorCallback } = mergedOptions
   const doRemoteRequest = async function ({ ...params  }:{ [key: string]: any } = {}) {
-    console.log('doRemoteRequest')
     setLoading(true)
     const res = await request(params)
-    console.log(res)
     setLoading(false)
     const {success, message, data} = res
     if (!success && !mergedOptions.disableErrorToast) {

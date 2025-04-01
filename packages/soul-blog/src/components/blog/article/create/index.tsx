@@ -1,6 +1,5 @@
 "use client";
 import { useRef, useState } from "react";
-import ArticleEditor from "./article-editor";
 import ArticleCreateHeader from "./header";
 import { Input } from "@/components/ui/input";
 import PublishSetting from "./publish-setting";
@@ -41,7 +40,6 @@ export default function CreateArticle() {
       title: articleTitleRef.current?.value || "",
       content: JSON.stringify(editorRef.current?.children || []),
     };
-    console.log(requestParams);
     const saveRes = await saveArticle(requestParams);
     if (saveRes.success) {
       setPublishOpen(false);
@@ -69,7 +67,8 @@ export default function CreateArticle() {
         </div>
       </ArticleCreateHeader>
       <div className="overflow-y-auto flex-1">
-        <div className="gap-1" id="editorWrapper">
+        {/* 一定要加 data-registry="plate" 属性，这个属性和 global.css 中的样式有关, 例如选中时的样式 */}
+        <div className="gap-1" id="editorWrapper" data-registry="plate">
           <SoulPlateEditor ref={editorRef} placeholder="写点什么吧..." />
         </div>
       </div>

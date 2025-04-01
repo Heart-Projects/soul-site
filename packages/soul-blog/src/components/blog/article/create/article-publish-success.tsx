@@ -12,9 +12,6 @@ export default function ArticlePublishSuccess({ id }: { id: number }) {
             <div className="ml-2 text-xl">文章发布成功</div>
           </div>
         </CardTitle>
-        {/* <CardContent>
-          <div>skdksdkkdkk</div>
-        </CardContent> */}
         <CardFooter>
           <div className="p-4 flex gap-3">
             <Link href="/article/create">继续创作</Link>

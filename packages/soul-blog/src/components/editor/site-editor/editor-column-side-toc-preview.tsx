@@ -21,10 +21,8 @@ const EditorColumnTocSideTocSimplePreview = ({
     item.index = index;
   });
   const onMouseFloatSideToc = () => {
-    console.log("onMouseFloatSideToc");
   };
   const onMouseLeaveFloatSideToc = () => {
-    console.log("onMouseLeaveFloatSideToc");
   };
   return (
     <div

@@ -54,7 +54,6 @@ const ColumnTable = ({
       activeItem.id || 0
     );
     setDataList(success ? data : []);
-    console.log(activeItem);
   }, [activeItem]);
   useEffect(() => {
     getDataList();

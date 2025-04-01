@@ -41,7 +41,7 @@ const onNavToItem = (item: TreeNodeProps, columnIdentify: string) => {
   window.history.pushState(
     {},
     "",
-    `/column/detail/${columnIdentify}/${item.identify}`
+    `/column/view/${columnIdentify}/${item.identify}`
   );
 };
 const TableContentTreeNode = ({

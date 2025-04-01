@@ -52,7 +52,6 @@ export function useTocNavigationState() {
     }
   }, [headList]);
   useLayoutEffect(() => {
-    console.log("useLayoutEffect");
     onChangeNavigation();
     const contentObserve = new IntersectionObserver(
       (entries) => {

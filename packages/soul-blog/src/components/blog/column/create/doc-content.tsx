@@ -30,7 +30,6 @@ const doRequestColumnArticleContent = async (
   pageId: string,
   callback?: (data: ColumnArticleContent) => void
 ) => {
-  console.log(columnIdentify, pageId);
   const { success, data } = await requestColumnArticlesContent({
     columnIdentify,
     identify: pageId,

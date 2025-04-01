@@ -21,8 +21,6 @@ export default function ArticleEditor({
   const [publishOpen, setPublishOpen] = useState(false);
   const router = useRouter();
   const onSubmitForm = async (data: PublishFormSchema) => {
-    console.log("index receive");
-    console.log(data);
     const { label, summary = "", ...rest } = data;
     const userLabel = data.label?.join(",");
     let articleSummary = summary;
@@ -39,7 +37,6 @@ export default function ArticleEditor({
       title: articleTitleRef.current?.value || "",
       content: JSON.stringify(editorRef.current?.children || []),
     };
-    console.log(requestParams);
     const saveRes = await saveArticle(requestParams);
     if (saveRes.success) {
       setPublishOpen(false);
@@ -47,7 +44,6 @@ export default function ArticleEditor({
     }
   };
   const onPublishArticle = () => {
-    console.log("publish");
     setPublishOpen(true);
   };
   const onDraftArticle = () => {};

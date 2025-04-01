@@ -411,7 +411,6 @@ const SideContentMemo = memo(function SideContent({
     action: string,
     dataItem?: TreeNodeProps
   ) => {
-    console.log(dataItem, action, source);
     menuOperatorItem.current = dataItem || defaultIndexNodeItem;
     switch (source) {
       case "global":
@@ -464,7 +463,6 @@ const SideContentMemo = memo(function SideContent({
     } else {
       // 说明是一个子元素
       const parentEl = findTreeItem(currentTreeData, source.parentId || 0);
-      console.log(parentEl);
       const currentAtParentIndex =
         parentEl?.children?.findIndex((item) => item.id === source.id) || 0;
       if (currentAtParentIndex > -1) {
@@ -484,20 +482,16 @@ const SideContentMemo = memo(function SideContent({
         currentTreeData,
         target.parentId || 0
       );
-      console.log(targetParentEl);
       const targetIndex = targetParentEl?.children?.findIndex(
         (item) => item.id === target.id
       );
       targetParentEl?.children?.splice(targetIndex || 0, 0, source);
     }
-    console.log(currentTreeData);
     setTreeData([...currentTreeData]);
-    console.log(source, target);
     const { success, message } = await requestColumnArticlesModifyOrder({
       sourceItemId: source.id as number,
       targetItemId: target.id as number,
     });
-    console.log(success, message);
   };
   return (
     <>

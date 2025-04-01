@@ -109,7 +109,6 @@ class FetchHttpClient implements IHttpClient {
   }
 }
 const baseUrl = process.env.NEXT_PUBLIC_API_URL || ""
-console.log('baseUrl=' + baseUrl)
 const httpClient: IHttpClient = new FetchHttpClient(
   baseUrl
 )

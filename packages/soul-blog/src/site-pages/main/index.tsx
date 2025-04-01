@@ -4,6 +4,7 @@ import AboutUs from "./components/side/about-us";
 import ArticleList from "./components/article-item-list";
 import { cn } from "@/lib/utils";
 import Link from "next/link";
+import { requestHomeSiteCategory } from "@/api/site-category";
 // import { useSearchParams, useParams } from "next/navigation";
 import { NextRequest } from "next/server";
 const TopTab = ({
@@ -24,43 +25,40 @@ const TopTab = ({
   );
 };
 
-const TopNavHeader = ({
+const TopNavHeader = async ({
   className,
   initialCategory = "",
 }: {
   className?: string;
   initialCategory?: string;
 }) => {
-  const topNavList = [
-    // {
-    //   name: "",
-    //   label: "首页",
-    //   href: "/",
-    // },
-    {
-      name: "news",
-      label: "近期原创",
-      href: "/article/news",
-    },
-    {
-      name: "backend",
-      label: "后端",
-      href: "/article/backend",
-    },
-    {
-      name: "frontend",
-      label: "前端",
-      href: "/article/frontend",
-    },
-  ];
+  const { success, data, message } = await requestHomeSiteCategory();
+  let topNavList: {
+    name: string;
+    label: string;
+    link: string;
+    navName: string;
+  }[] = [];
+  if (success) {
+    topNavList = data.map((item) => {
+      return {
+        name: item.name,
+        label: item.name,
+        link: `/article/${item.navName}`,
+        navName: item.navName,
+      };
+    });
+  }
   return (
     <div className={cn("bg-white px-20 py-2", className)}>
       {topNavList.map((item, index) => {
         return (
           <TopTab
             key={index}
-            linkHref={item.href}
-            className={initialCategory === item.name ? "  text-blue-600" : ""}
+            linkHref={item.link}
+            className={
+              initialCategory === item.navName ? "  text-blue-600" : ""
+            }
           >
             {item.label}
           </TopTab>

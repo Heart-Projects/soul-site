@@ -11,6 +11,7 @@ interface SaveArticleParams {
   content: string
   summary?: string
   status: number
+  thumbnail?: string
   label?: string
   labels?: ArticleTag[]
   isComment: boolean | string

@@ -368,7 +368,6 @@ const ColumnCategoryIndex = memo(function ColumnCategoryC({
 }: {
   onChangeActiveItem?: (item?: ArticleColumnCategory) => void;
 }) {
-  console.log("render ColumnCategoryIndex");
   const router = useRouter();
   const pathName = usePathname();
   const searchParams = useSearchParams();
@@ -407,7 +406,6 @@ const ColumnCategoryIndex = memo(function ColumnCategoryC({
   const onSearch = (e: KeyboardEvent<HTMLInputElement>) => {
     if (e.key === "Enter") {
       setSearch(e.currentTarget?.value);
-      console.log(search);
     }
   };
   useEffect(() => {

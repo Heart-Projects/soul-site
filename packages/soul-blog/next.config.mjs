@@ -18,6 +18,12 @@ const nextConfig = {
         port: "",
         pathname: "/it/**",
       },
+      {
+        protocol: "http",
+        hostname: "minio-api.k8s.qc.host.dxy",
+        port: "",
+        pathname: "/file-image/**",
+      },
     ],
   },
 };

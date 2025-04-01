@@ -28,6 +28,7 @@ import { requestUserArticleCategory } from "@/api/user-category";
 import type { SiteCategory } from "@/api/site-category";
 import type { UserArticleCategory } from "@/api/user-category";
 import type { SaveArticleParams } from "@/api/user-article";
+import ArticleImg from "@/components/common/blog/article-img";
 function HorizontalFormLayout({
   children,
   labelWidth = "w-20",
@@ -57,6 +58,7 @@ const FormSchema = z.object({
     message: "请选择有效的分类",
   }),
   status: z.number(),
+  thumbnailFileInfo: z.string(),
 });
 
 export type PublishFormSchema = z.infer<typeof FormSchema>;
@@ -69,7 +71,6 @@ export default function PublishForm({
   children?: React.ReactNode;
   onSubmitForm?: (p: z.infer<typeof FormSchema>) => void;
 }) {
-  console.log("article", article);
   const [siteCategory = [], setSiteCategory] = React.useState<SiteCategory[]>();
   const [articleCategory = [], setArticleCategory] =
     React.useState<UserArticleCategory[]>();
@@ -89,7 +90,6 @@ export default function PublishForm({
       siteCategoryId: article ? article.siteCategoryId : 0,
     },
   });
-  console.log("form", form.getValues());
   React.useEffect(() => {
     const getSiteCategoryList = async () => {
       const { success, data, message } = await requestSiteCategory();
@@ -204,6 +204,24 @@ export default function PublishForm({
                     {...field}
                     placeholder="请输入文章摘要，默认取文章前50个字符"
                   />
+                </FormControl>
+                <FormMessage />
+              </HorizontalFormLayout>
+            </FormItem>
+          )}
+        />
+        <FormField
+          control={form.control}
+          name="thumbnailFileInfo"
+          render={({ field }) => (
+            <FormItem>
+              <HorizontalFormLayout>
+                <FormLabel>封面设置</FormLabel>
+                <FormControl>
+                  <ArticleImg
+                    {...field}
+                    onValueChange={field.onChange}
+                  ></ArticleImg>
                 </FormControl>
                 <FormMessage />
               </HorizontalFormLayout>

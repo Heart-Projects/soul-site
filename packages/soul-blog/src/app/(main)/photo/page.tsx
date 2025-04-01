@@ -1,7 +1,14 @@
+import { Alert, AlertDescription, AlertTitle } from "@/components/ui/alert";
+import { SmilePlus } from "lucide-react";
+
 export default function PhotoPageIndex() {
   return (
-    <section>
-      <h1>Login</h1>
+    <section className="min-h-screen flex items-center justify-center">
+      <Alert className="max-w-2xl">
+        <SmilePlus className="h-4 w-4" />
+        <AlertTitle>照片墙</AlertTitle>
+        <AlertDescription>功能还在开发中，敬请期待</AlertDescription>
+      </Alert>
     </section>
   );
 }

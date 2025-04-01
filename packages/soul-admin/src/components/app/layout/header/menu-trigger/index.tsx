@@ -10,7 +10,6 @@ const MenuTrigger = ({ className }: { className?: string }) => {
   );
 
   const onChangeMenuCollapse = () => {
-    console.log("menuCollapse", menuCollapse);
     dispatch(setMenuCollapse(!menuCollapse));
   };
   return (

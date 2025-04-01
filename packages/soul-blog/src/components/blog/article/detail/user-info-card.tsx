@@ -23,7 +23,6 @@ export default async function UserInfoCard() {
   const articleSummaryData = await requestUserArticleSummary(authHeader);
   const { success, message, data } = articleSummaryData;
   const { user, articleData } = data || {};
-  console.log(articleSummaryData);
   return (
     <Card className="w-72">
       <CardContent>

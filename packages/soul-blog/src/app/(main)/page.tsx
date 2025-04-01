@@ -5,10 +5,13 @@ export default function Home({
   searchParams: { [key: string]: string | string[] | undefined };
 }) {
   const pageIndex = searchParams.p || 1;
-  console.log(searchParams);
+  console.info("main page");
+  const category = Array.isArray(searchParams.category)
+    ? searchParams.category[0]
+    : searchParams.category || "";
   return (
     <main className="min-h-screen min-w-screen scollbar">
-      <MainPageIndex pageIndex={Number(pageIndex)} />
+      <MainPageIndex pageIndex={Number(pageIndex)} category={category} />
     </main>
   );
 }

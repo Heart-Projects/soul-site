@@ -30,7 +30,6 @@ export const appSlice = createSlice({
   initialState,
   reducers: {
     setMenuCollapse: (state, { payload }: {payload: boolean}) => {
-      console.log('setMenuCollapse', payload);
       state.menuCollapse = payload
     },
     setTheme: (state, {payload}: {payload: ThemeConfig}) => {

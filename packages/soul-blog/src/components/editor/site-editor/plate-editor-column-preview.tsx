@@ -55,6 +55,7 @@ export function SoulPlateEditorColumnPreview({
               "flex-1 rounded-l-lg max-2xl:max-w-6xl ",
               toCFixed ? "w-[calc(100%-20rem)]" : "w-[calc(100%-10rem)]"
             )}
+            data-registry="plate"
           >
             <EditorContainer className="w-full">
               <Editor variant="fullWidth" className="px-2" id="editor_1kkkk" />

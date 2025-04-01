@@ -1,11 +1,9 @@
 import { clearSaveCookie } from "./localstore";
-import { NextResponse } from "next/server";
+
 export const LoginOut = () => {
-  const a = window;
-  if (a) {
+  // 检测是否是在 浏览器 中
+  if (typeof window !== "undefined") {
     clearSaveCookie();
     window.location.href = "/login";
-  } else {
-    NextResponse.redirect(new URL("/login", window.location.origin));
   }
 };

@@ -66,7 +66,6 @@ export function useUploadFile({
         }
       );
       const { success, message, data } = response.data;
-      console.log(response);
       const uploadedFile = {
         key: data.key,
         url: data.url,

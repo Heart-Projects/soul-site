@@ -20,12 +20,8 @@ const EditorTocSideTocSimplePreview = ({
   headList.forEach((item, index) => {
     item.index = index;
   });
-  const onMouseFloatSideToc = () => {
-    console.log("onMouseFloatSideToc");
-  };
-  const onMouseLeaveFloatSideToc = () => {
-    console.log("onMouseLeaveFloatSideToc");
-  };
+  const onMouseFloatSideToc = () => {};
+  const onMouseLeaveFloatSideToc = () => {};
   return (
     <div
       className={cn("w-20 mt-6", className)}
