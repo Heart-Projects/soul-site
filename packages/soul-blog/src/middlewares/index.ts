@@ -15,9 +15,9 @@ interface HandleFunc {
 const handles: HandleFunc[] = [];
 
 // 不需要验证的路由
-const publicRoutes = ['/login', '/register', '/api/auth', '/api/public'];
+const publicRoutes = ['/login', '/register', '/api/auth', '/api/public', '/'];
 // 需要验证的路由
-const protectedRoutes = ['/dashboard', '/profile', '/settings'];
+const protectedRoutes = ['/dashboard', '/profile', '/settings', 'article/create'];
 
 const isPublicRoute = (pathname: string) => {
   return publicRoutes.some(route => pathname.startsWith(route));
@@ -31,7 +31,7 @@ const JwtAuthCheck: HandleFunc = async (request) => {
   const serverCookies = await cookies();
   const auth = serverCookies.get(TOKEN_KEY)?.value || "";
   const pathname = request.nextUrl.pathname;
-
+  console.log('JwtAuthCheck', auth, pathname)
   // 设置 Authorization header
   if (!request.headers.get('Authorization') && auth !== '') {
     request.headers.set('Authorization', `Bearer ${auth}`);
@@ -74,12 +74,19 @@ const routerCheck: HandleFunc = async (request) => {
 handles.push(JwtAuthCheck);
 handles.push(routerCheck);
 
-export default async function MiddlewareHandlers(request: NextRequest) {
+type MiddleResult = {
+  release: boolean;
+  result: NextResponse | Response | null;
+}
+export default async function MiddlewareHandlers(request: NextRequest): Promise<MiddleResult> {
   for (const handle of handles) {
     const res = await handle(request);
     if (!res.release) {
-      return res.result;
+      return {
+        release: false,
+        result: res.result
+      };
     }
   }
-  return NextResponse.next();
+  return { release: true, result: NextResponse.next() } ;
 }

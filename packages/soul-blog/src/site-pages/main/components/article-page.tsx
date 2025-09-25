@@ -17,7 +17,7 @@ export default function ArticlePage({
   pageIndex: number;
   category?: string;
 }) {
-  const articlePrefix = category ? `/article/${category}/` : "/";
+  const articlePrefix = category ? `nav/${category}/` : "";
   return (
     <Pagination>
       <PaginationContent>

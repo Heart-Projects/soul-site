@@ -1,6 +1,6 @@
 import { ResponseData, Headers } from "@/types/common";
 import HttpClient from "../lib/http-client";
-import type { UserInfo } from "@/types/user";
+import type { UserInfo, UserLoginInfo } from "@/types/user";
 type UserLogin = {
   username: string;
   password: string;
@@ -14,7 +14,7 @@ type SysUser = {
   phone: string;
   avatar: string;
   homeUrl: string;
-}
+};
 type UserArticleStatisticData = {
   id: number;
   // 热度
@@ -29,34 +29,63 @@ type UserArticleStatisticData = {
   forwardCount: number;
   // 评论数量
   commentCount: number;
-}
+};
 
-type SimpleUser = Pick<SysUser, "id" | "userIdentify" | "name" | "avatar" | "homeUrl"|"email">
+type SimpleUser = Pick<
+  SysUser,
+  "id" | "userIdentify" | "name" | "avatar" | "homeUrl" | "email"
+>;
 
 type UserArticleData = {
   user: SimpleUser;
   articleData: UserArticleStatisticData;
-}
+};
 export async function requestLogin({
   username,
   password,
 }: UserLogin): Promise<ResponseData<string>> {
-  const response = await HttpClient.post<UserLogin,string>("/user/login", {
+  const response = await HttpClient.post<UserLogin, string>("/user/login", {
     username,
     password,
-  })
-  return response
+  });
+  return response;
 }
 
-export async function requestUserInfo(): Promise<ResponseData<UserInfo>> {
-  const response = await HttpClient.get<null,UserInfo>("/user/info")
-  return response
+export async function requestUserInfo(): Promise<ResponseData<UserLoginInfo>> {
+  const response = await HttpClient.get<null, UserLoginInfo>("/user/info");
+  return response;
 }
 
 /**
  * 获取用户文章统计
- * @returns 
+ * @returns
  */
-export async function requestUserArticleSummary(headers?: Headers): Promise<ResponseData<UserArticleData>> {
-  return await HttpClient.get<null,UserArticleData>("/user/article/summary", undefined, headers)
+export async function requestUserArticleSummary(
+  userIdentify: string,
+  headers?: Headers
+): Promise<ResponseData<UserArticleData>> {
+  return await HttpClient.get<null, UserArticleData>(
+    "/user/article" + "/" + userIdentify + "/summary",
+    undefined,
+    headers
+  );
+}
+
+// 用户站点配置
+type UserSiteConfig = {
+  userId: number;
+  userIdentify: string;
+  theme: string;
+};
+
+// 获取用户站点配置
+export async function requestUserSiteConfig(
+  userIdentify: string,
+  headers?: Headers
+): Promise<ResponseData<UserSiteConfig>> {
+  return await HttpClient.get<null, UserSiteConfig>(
+    "/user/" + userIdentify + "/site-config",
+    undefined,
+    headers
+  );
 }

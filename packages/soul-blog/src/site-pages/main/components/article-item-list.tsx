@@ -8,10 +8,7 @@ import { TOKEN_KEY } from "@/lib/localstore";
 import { Alert, AlertDescription, AlertTitle } from "@/components/ui/alert";
 import { Bell, Star, ThumbsUp, Activity } from "lucide-react";
 import Image from "next/image";
-import {
-  requestUserArticleList,
-  UserArticleListParams,
-} from "@/api/user-article";
+import { requestArticleList, UserArticleListParams } from "@/api/user-article";
 const ArticleStatisticsTag = ({
   children,
   className,
@@ -33,7 +30,7 @@ const ArticleItem = ({ item }: { item: UserArticleItem }) => {
       <div className="flex-1 overflow-hidden">
         <h2 className="text-xl px-2 hover:text-blue-600">
           <Link
-            href={`/article/detail/${item.userId}/${item.id}`}
+            href={`/u/${item.userIdentify}/article/${item.id}`}
             target="_blank"
           >
             {item.title}
@@ -67,7 +64,7 @@ const ArticleItem = ({ item }: { item: UserArticleItem }) => {
       {hasThumbnail && (
         <div className="flex-none w-36 h-28 relative m-auto">
           <Link
-            href={`/article/detail/${item.userId}/${item.id}`}
+            href={`/u/${item.userIdentify}/article/${item.id}`}
             target="_blank"
           >
             <Image
@@ -101,21 +98,20 @@ const ArticleItemList = ({
 const ArticleList = async ({
   category,
   pageIndex,
+  userIdentify,
 }: {
   category?: string;
   pageIndex: number;
+  userIdentify?: string;
 }) => {
   const pagePrams: UserArticleListParams = {
+    userIdentify: userIdentify || "",
     pageIndex: pageIndex || 1,
     pageSize: 10,
     category: category || "",
   };
-  const cookieList = await cookies();
-  const token = cookieList.get(TOKEN_KEY)?.value || "";
-  const response = await requestUserArticleList(pagePrams, {
-    Authorization: token,
-  });
-  const { data, success } = response;
+  console.log("pagePrams", pagePrams);
+  const { data, success } = await requestArticleList(pagePrams);
   const articleList = success ? data.list : [];
   const total = success ? data.total : 0;
   const totalPages = Math.ceil(total / pagePrams.pageSize);

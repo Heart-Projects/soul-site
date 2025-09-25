@@ -27,8 +27,10 @@ const TopTab = ({
 
 const TopNavHeader = async ({
   className,
+  userIdentify,
   initialCategory = "",
 }: {
+  userIdentify: string;
   className?: string;
   initialCategory?: string;
 }) => {
@@ -39,16 +41,19 @@ const TopNavHeader = async ({
     link: string;
     navName: string;
   }[] = [];
+  const navPrefix = initialCategory ? "" : `${userIdentify}/nav/`;
+  console.log("userIdentify top nav", userIdentify + "12");
   if (success) {
     topNavList = data.map((item) => {
       return {
         name: item.name,
         label: item.name,
-        link: `/nav/${item.navName}`,
+        link: `${navPrefix}${item.navName}`,
         navName: item.navName,
       };
     });
   }
+  console.log("topNavList", topNavList);
   return (
     <div className={cn("bg-white px-20 py-2", className)}>
       {topNavList.map((item, index) => {
@@ -67,27 +72,35 @@ const TopNavHeader = async ({
     </div>
   );
 };
-const MainPageIndex = ({
+const MainPageUserIndex = ({
+  userIdentify = "",
   category,
   pageIndex = 1,
 }: {
+  userIdentify: string;
   category?: string;
   pageIndex?: number;
 }) => {
+  console.log(userIdentify);
   return (
     <>
       <div className=" min-h-screen bg-[#f7f8f9] ">
         <TopNavHeader
           className="bg-white px-20 py-2"
+          userIdentify={userIdentify}
           initialCategory={category}
         />
         <div className="flex px-20 justify-center 2xl:gap-10 gap-6 mt-5">
           <div className="flex-auto w-96 bg-white 2xl:w-9/12">
-            <ArticleList category={category} pageIndex={pageIndex} />
+            <ArticleList
+              category={category}
+              pageIndex={pageIndex}
+              userIdentify={userIdentify}
+            />
           </div>
           <aside className="flex-none w-[350px] relative">
             <div className="flex flex-col gap-12 sticky left-0 top-20  ">
-              <ArticleCenterCard />
+              <ArticleCenterCard userIdentify={userIdentify} />
               <HotArticle />
               <AboutUs />
             </div>
@@ -98,4 +111,4 @@ const MainPageIndex = ({
   );
 };
 
-export default MainPageIndex;
+export default MainPageUserIndex;

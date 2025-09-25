@@ -1,6 +1,7 @@
+import { info } from './../../../node_modules/sass/types/index.d';
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 import type { RootState } from '../store';
-import type {UserInfo} from '@/types/user';
+import type {UserInfo, UserLoginInfo} from '@/types/user';
 interface UserState extends UserInfo {
   hasLogin: boolean
 }
@@ -20,13 +21,16 @@ export const userSlice = createSlice({
     setUsername: (state, action: PayloadAction<string>) => {
       state.username = action.payload
     },
-    setUserInfo: (state, action: PayloadAction<UserInfo>) => {
-      state.username = action.payload.username
-      state.userId = action.payload.userId
-      state.menus = action.payload.menus
-      state.roles = action.payload.roles
-      state.exp = action.payload.exp
-      state.hasLogin = true
+    setUserInfo: (state, action: PayloadAction<UserLoginInfo>) => {
+      const {hasLogin, info} = action.payload
+      state.hasLogin = hasLogin
+      if (hasLogin) {
+        state.username = info.username
+        state.userId = info.userId
+        state.menus = info.menus
+        state.roles = info.roles
+        state.exp = info.exp
+      }
     },
     clearUseInfo: (state) => {
       state = initialState

@@ -23,15 +23,15 @@ const ActionButton = ({ label, icon }: { label: string; icon: ReactNode }) => {
 };
 
 const ArticleDetail = async ({
-  userId,
+  userIdentify,
   articleId,
 }: {
-  userId: number;
+  userIdentify: string;
   articleId: number;
 }) => {
   const authHeader = await getAuthHeader();
   const articleDetail = await requestArticleDetail(
-    { userId, articleId },
+    { userIdentify, articleId },
     authHeader
   );
   const { success, message, data } = articleDetail;
@@ -80,7 +80,7 @@ const ArticleDetail = async ({
                   {pre && (
                     <>
                       上一篇:
-                      <Link href={`/article/detail/${userId}/${pre.id}`}>
+                      <Link href={`/article/detail/${userIdentify}/${pre.id}`}>
                         <span className="hover:text-blue-600 inline-block pl-1">
                           {pre.title}
                         </span>
@@ -92,7 +92,7 @@ const ArticleDetail = async ({
                   {next && (
                     <>
                       下一篇:
-                      <Link href={`/article/detail/${userId}/${next.id}`}>
+                      <Link href={`/article/detail/${userIdentify}/${next.id}`}>
                         <span className="hover:text-blue-600 inline-block pl-1">
                           {next.title}
                         </span>
@@ -117,7 +117,7 @@ const ArticleDetail = async ({
           </div>
           <div className=" flex-none w-96 ">
             <div className="sticky top-8 left-0 flex flex-col items-center gap-2 ">
-              <UserInfoCard />
+              <UserInfoCard userIdentify={userIdentify} />
               <RecentArticleCard />
             </div>
           </div>

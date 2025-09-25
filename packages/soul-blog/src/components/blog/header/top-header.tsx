@@ -40,7 +40,8 @@ const components: { title: string; href: string; description: string }[] = [
   },
 ];
 
-export default function TopHeader() {
+export default function TopHeader({ userIdentity }: { userIdentity?: string }) {
+  const urlPrefix = userIdentity ? userIdentity : "/user";
   return (
     <>
       <div className="sticky top-0 left-0 bg-background z-10">
@@ -105,7 +106,7 @@ export default function TopHeader() {
             <SiteSearch className=" w-44 leading-7 px-1 " />
 
             <Button className="ml-2" asChild>
-              <Link href="/article/create" target="_blank">
+              <Link href={urlPrefix + "/article/create"} target="_blank">
                 写文章
               </Link>
             </Button>

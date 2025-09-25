@@ -23,6 +23,7 @@ export async function saveArticle(articleParams: SaveArticleParams): Promise<Res
 }
 
 interface UserArticleListParams {
+  userIdentify?: string
   pageIndex: number
   pageSize: number
   category: string
@@ -38,6 +39,7 @@ interface ArticleNavItem {
   title: string
 }
 interface UserArticleItem extends SaveArticleParams  {
+  userIdentify: string
   labels: ArticleTag[]
   // 上一遍文章
   next?: ArticleNavItem
@@ -50,13 +52,13 @@ interface UserArticleItem extends SaveArticleParams  {
  * @param params 
  * @returns 
  */
-export async function requestUserArticleList(params: UserArticleListParams, headers?: Headers): Promise<ResponseData<ResponsePageData<UserArticleItem>>> {
+export async function requestArticleList(params: UserArticleListParams, headers?: Headers): Promise<ResponseData<ResponsePageData<UserArticleItem>>> {
   return await HttpClient.get<UserArticleListParams, ResponsePageData<UserArticleItem>>("/article/list", params, headers)
 }
 
 type ArticleDetailParams = {
   articleId: number,
-  userId: number
+  userIdentify: string
 }
 
 /**
@@ -66,7 +68,7 @@ type ArticleDetailParams = {
  * @returns 
  */
 export async function requestArticleDetail(params: ArticleDetailParams, headers?: Headers): Promise<ResponseData<UserArticleItem>> {
-  return await HttpClient.get<ArticleDetailParams, UserArticleItem>("/article/detail/" +params.userId + "/" + params.articleId, undefined, headers)
+  return await HttpClient.get<ArticleDetailParams, UserArticleItem>("/article/detail/" +params.userIdentify + "/" + params.articleId, undefined, headers)
 }
 
 export async function requestArticleEditDetail(params: {articleId: number}, headers?: Headers): Promise<ResponseData<UserArticleItem>> {

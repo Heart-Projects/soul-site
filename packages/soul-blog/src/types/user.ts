@@ -5,3 +5,8 @@ export type UserInfo = {
   userId: number
   username: string
 }
+
+export type UserLoginInfo = {
+  hasLogin: boolean
+  info: UserInfo
+}

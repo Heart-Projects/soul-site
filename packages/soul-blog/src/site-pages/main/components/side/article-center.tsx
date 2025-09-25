@@ -31,7 +31,12 @@ const ButtonItem = ({
   );
 };
 
-export default function ArticleCenterCard() {
+export default function ArticleCenterCard({
+  userIdentify,
+}: {
+  userIdentify?: string;
+}) {
+  const sitePrefix = userIdentify ? `/u/${userIdentify}` : "/user";
   return (
     <Card>
       <CardHeader>
@@ -41,22 +46,22 @@ export default function ArticleCenterCard() {
         <ButtonItem
           label="写文章"
           icon={<PencilLine />}
-          href="/article/create"
+          href={sitePrefix + "/article/create"}
         />
         <ButtonItem
           label="文章管理"
           icon={<BookText />}
-          href="/article/center/manager/list"
+          href={sitePrefix + "/article/center/manager/list"}
         />
         <ButtonItem
           label="博客搬家"
           icon={<Square />}
-          href="/article/center/tools/sync"
+          href={sitePrefix + "/article/center/tools/sync"}
         />
       </CardContent>
       <CardFooter>
         <Button className="w-full">
-          <Link href="/article/center/index">进入创作中心</Link>
+          <Link href={sitePrefix + "/article/center/index"}>进入创作中心</Link>
         </Button>
       </CardFooter>
     </Card>

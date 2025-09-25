@@ -18,9 +18,16 @@ const LabeInfo = ({
     </div>
   );
 };
-export default async function UserInfoCard() {
+export default async function UserInfoCard({
+  userIdentify,
+}: {
+  userIdentify: string;
+}) {
   const authHeader = await getAuthHeader();
-  const articleSummaryData = await requestUserArticleSummary(authHeader);
+  const articleSummaryData = await requestUserArticleSummary(
+    userIdentify,
+    authHeader
+  );
   const { success, message, data } = articleSummaryData;
   const { user, articleData } = data || {};
   return (
